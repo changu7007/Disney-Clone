@@ -1,25 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import { selectMovies } from "../features/movie/movieSlice"
+import { useSelector } from "react-redux"
 
 function Movies() {
+    const movies = useSelector(selectMovies);
+    
+
     return (
         <Container>
             <h4>Recommended for you</h4>
             <Content>
-                <Wrap>
-                    <img src="https://cdn.lifestyleasia.com/wp-content/uploads/sites/7/2020/06/29215301/106014340_660614417860790_4258355680300755835_n-768x768.jpg"/>
-                </Wrap>
-                <Wrap>
-                    <img src="https://cdn.lifestyleasia.com/wp-content/uploads/sites/7/2020/06/29215301/106014340_660614417860790_4258355680300755835_n-768x768.jpg"/>
-                </Wrap>
-                <Wrap>
-                    <img src="https://cdn.lifestyleasia.com/wp-content/uploads/sites/7/2020/06/29215301/106014340_660614417860790_4258355680300755835_n-768x768.jpg"/>
-                </Wrap>
-                <Wrap>
-                    <img src="https://cdn.lifestyleasia.com/wp-content/uploads/sites/7/2020/06/29215301/106014340_660614417860790_4258355680300755835_n-768x768.jpg"/>
-
-                </Wrap>
-
+                {movies && 
+                    movies.map((movie)=>(
+                    <Wrap key={movie.id}>
+                      <Link to = {`/detail/${movie.id}`}>
+                           <img src={movie.cardImg} alt="1"/>
+                      </Link>            
+                    </Wrap>
+                    ))
+                }
             </Content>
         </Container>
     )
